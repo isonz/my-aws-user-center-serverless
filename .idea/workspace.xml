@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5984f3e1-9ad0-4007-9452-ff891e73aafa" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1hb8nKL1siKj5mlCFZCPR4vCwne" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/auth" />
+      <recent name="$PROJECT_DIR$/user" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5984f3e1-9ad0-4007-9452-ff891e73aafa" name="Default Changelist" comment="" />
+      <created>1600268596290</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1600268596290</updated>
+      <workItem from="1600268597564" duration="1014000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1358" height="54" key="GridCell.Tab.0.bottom" timestamp="1600269264808">
+      <screen x="56" y="23" width="1384" height="877" />
+    </state>
+    <state width="1358" height="54" key="GridCell.Tab.0.bottom/56.23.1384.877@56.23.1384.877" timestamp="1600269264808" />
+    <state width="1358" height="54" key="GridCell.Tab.0.center" timestamp="1600269264807">
+      <screen x="56" y="23" width="1384" height="877" />
+    </state>
+    <state width="1358" height="54" key="GridCell.Tab.0.center/56.23.1384.877@56.23.1384.877" timestamp="1600269264807" />
+    <state width="1358" height="54" key="GridCell.Tab.0.left" timestamp="1600269264806">
+      <screen x="56" y="23" width="1384" height="877" />
+    </state>
+    <state width="1358" height="54" key="GridCell.Tab.0.left/56.23.1384.877@56.23.1384.877" timestamp="1600269264806" />
+    <state width="1358" height="54" key="GridCell.Tab.0.right" timestamp="1600269264807">
+      <screen x="56" y="23" width="1384" height="877" />
+    </state>
+    <state width="1358" height="54" key="GridCell.Tab.0.right/56.23.1384.877@56.23.1384.877" timestamp="1600269264807" />
+  </component>
+</project>
