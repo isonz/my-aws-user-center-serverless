@@ -66,44 +66,62 @@ provider:
 #  include:
 #    - include-me.js
 #    - include-me-dir/**
+#  individually: true
+#  excludeDevDependencies: false
 #  exclude:
 #    - exclude-me.js
-#    - exclude-me-dir/**
+#    - node_modules/**
 
 functions:
-  create:
+  register:
     handler: handler.authRegister
     events:
       - http:
           path: auth/register
           method: post
           cors: true
-  readAll:
-    handler: handler.readAll
+  login:
+    handler: handler.userGetOne
     events:
       - http:
-          path: todos
+          path: auth/login
+          method: post
+          cors: true
+  authDelete:
+    handler: handler.authDelete
+    events:
+      - http:
+          path: auth/{id}
+          method: delete
+          cors: true
+
+
+  allUser:
+    handler: handler.userReadAll
+    events:
+      - http:
+          path: user/all
           method: get
           cors: true
-  readOne:
-    handler: handler.readOne
+  getUser:
+    handler: handler.userGetOne
     events:
       - http:
-          path: todos/{id}
+          path: user/{id}
           method: get
           cors: true
-  update:
-    handler: handler.update
+  updateUser:
+    handler: handler.userUpdate
     events:
       - http:
-          path: todos/{id}
+          path: user/{id}
           method: put
           cors: true
-  delete:
-    handler: handler.delete
+  deleteUser:
+    handler: handler.userDelete
     events:
       - http:
-          path: todos/{id}
+          path: user/{id}
           method: delete
           cors: true
 
@@ -161,19 +179,56 @@ functions:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    AuthDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: username
+            AttributeType: S
+          - AttributeName: password
+            AttributeType: S
+          - AttributeName: salt
+            AttributeType: S
+          - AttributeName: createdAt
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: username
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: 'todos'
+        TableName: 'auth'
+
+    UserDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: username
+            AttributeType: S
+          - AttributeName: nickname
+            AttributeType: S
+          - AttributeName: avatarUrl
+            AttributeType: S
+          - AttributeName: age
+            AttributeType: N
+          - AttributeName: gender
+            AttributeType: B
+          - AttributeName: createdAt
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: username
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: 'user'

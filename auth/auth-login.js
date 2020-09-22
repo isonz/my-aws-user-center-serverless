@@ -5,12 +5,12 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports = (event, callback) => {
   const params = {
-    TableName: 'todos',
+    TableName: 'auth',
     Key: {
-      id: event.pathParameters.id
+      username: event.pathParameters.username,
+      password: event.pathParameters.password,
     }
   };
-
   return dynamoDb.get(params, (error, data) => {
     if (error) {
       callback(error);

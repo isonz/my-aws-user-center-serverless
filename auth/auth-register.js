@@ -9,6 +9,9 @@ module.exports = (event, callback) => {
 
   data.id = uuid.v1();
   data.updatedAt = new Date().getTime();
+  data.username = event.pathParameters.username;
+  data.password = event.pathParameters.password;
+  data.email = event.pathParameters.email;
 
   const params = {
     TableName: 'auth',
