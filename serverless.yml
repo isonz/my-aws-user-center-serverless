@@ -183,52 +183,52 @@ resources:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
+        TableName: 'auth'
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
           - AttributeName: username
             AttributeType: S
-          - AttributeName: password
-            AttributeType: S
-          - AttributeName: salt
-            AttributeType: S
-          - AttributeName: createdAt
-            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-          - AttributeName: username
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: 'auth'
+        GlobalSecondaryIndexes:
+          - IndexName: username-index
+            KeySchema:
+              - AttributeName: username
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: '5'
+              WriteCapacityUnits: '5'
 
     UserDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
+        TableName: 'user'
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
           - AttributeName: username
             AttributeType: S
-          - AttributeName: nickname
-            AttributeType: S
-          - AttributeName: avatarUrl
-            AttributeType: S
-          - AttributeName: age
-            AttributeType: N
-          - AttributeName: gender
-            AttributeType: B
-          - AttributeName: createdAt
-            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-          - AttributeName: username
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: 'user'
+        GlobalSecondaryIndexes:
+          - IndexName: username-index
+            KeySchema:
+              - AttributeName: username
+                KeyType: HASH
+            Projection:
+              ProjectionType: KEYS_ONLY
+            ProvisionedThroughput:
+              ReadCapacityUnits: '5'
+              WriteCapacityUnits: '5'
