@@ -1,0 +1,21 @@
+register:
+  handler: handler.authRegister
+  events:
+    - http:
+        path: auth/register
+        method: post
+        cors: true
+login:
+  handler: handler.authLogin
+  events:
+    - http:
+        path: auth/login
+        method: post
+        cors: true
+authDelete:
+  handler: handler.authDelete
+  events:
+    - http:
+        path: auth/{id}
+        method: delete
+        cors: true

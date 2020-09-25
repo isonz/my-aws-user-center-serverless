@@ -1,0 +1,29 @@
+allUser:
+  handler: handler.userReadAll
+  events:
+    - http:
+        path: user/all
+        method: get
+        cors: true
+getUser:
+  handler: handler.userGetOne
+  events:
+    - http:
+        path: user/{id}
+        method: get
+        cors: true
+updateUser:
+  handler: handler.userUpdate
+  events:
+    - http:
+        path: user/{id}
+        method: put
+        cors: true
+deleteUser:
+  handler: handler.userDelete
+  events:
+    - http:
+        path: user/{id}
+        method: delete
+        cors: true
+

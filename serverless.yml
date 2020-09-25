@@ -73,57 +73,9 @@ provider:
 #    - node_modules/**
 
 functions:
-  register:
-    handler: handler.authRegister
-    events:
-      - http:
-          path: auth/register
-          method: post
-          cors: true
-  login:
-    handler: handler.userGetOne
-    events:
-      - http:
-          path: auth/login
-          method: post
-          cors: true
-  authDelete:
-    handler: handler.authDelete
-    events:
-      - http:
-          path: auth/{id}
-          method: delete
-          cors: true
+  - ${file(./src/components/auth/serverless.yml)}
+  - ${file(./src/components/user/serverless.yml)}
 
-
-  allUser:
-    handler: handler.userReadAll
-    events:
-      - http:
-          path: user/all
-          method: get
-          cors: true
-  getUser:
-    handler: handler.userGetOne
-    events:
-      - http:
-          path: user/{id}
-          method: get
-          cors: true
-  updateUser:
-    handler: handler.userUpdate
-    events:
-      - http:
-          path: user/{id}
-          method: put
-          cors: true
-  deleteUser:
-    handler: handler.userDelete
-    events:
-      - http:
-          path: user/{id}
-          method: delete
-          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -178,57 +130,25 @@ functions:
 #       Value: "Some output value"
 
 resources:
-  Resources:
-    AuthDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        TableName: 'auth'
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-          - AttributeName: username
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        GlobalSecondaryIndexes:
-          - IndexName: username-index
-            KeySchema:
-              - AttributeName: username
-                KeyType: HASH
-            Projection:
-              ProjectionType: ALL
-            ProvisionedThroughput:
-              ReadCapacityUnits: '5'
-              WriteCapacityUnits: '5'
+  - ${file(./src/helpers/db-serverless.yml)}
 
-    UserDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        TableName: 'user'
-        ProvisionedThroughput:
-          ReadCapacityUnits: 5
-          WriteCapacityUnits: 5
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-          - AttributeName: username
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        GlobalSecondaryIndexes:
-          - IndexName: username-index
-            KeySchema:
-              - AttributeName: username
-                KeyType: HASH
-            Projection:
-              ProjectionType: KEYS_ONLY
-            ProvisionedThroughput:
-              ReadCapacityUnits: '5'
-              WriteCapacityUnits: '5'
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
+
+custom:
+  serverless-offline:
+    allowCache: true
+    httpPort: 4000
+    useChildProcesses: true
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      # dbPath: true
+      migrate: true
+    migration:
+      dir: offline/migrations
+    stages:
+      - dev
+

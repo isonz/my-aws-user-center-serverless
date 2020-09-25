@@ -1,14 +1,15 @@
 'use strict';
-
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = require('../../helpers/dynamodb');
+const config = require('./base');
 
 module.exports = (event, callback) => {
+  let data = JSON.parse(event.body).data;
+
   const params = {
-    TableName: 'auth',
+    TableName: config.TableName,
     Key: {
-      username: event.pathParameters.username,
-      password: event.pathParameters.password,
+      username: data.username,
+      password: data.password,
     }
   };
   return dynamoDb.get(params, (error, data) => {
