@@ -1,21 +1,43 @@
 'use strict';
+
+const sha256 = require("../../common/crypto");
 const dynamoDb = require('../../helpers/dynamodb');
 const config = require('./base');
+const err = require('../../common/errors');
 
 module.exports = (event, callback) => {
-  let data = JSON.parse(event.body).data;
+  const body = JSON.parse(event.body);
+  let eventData = body.data;
 
-  const params = {
+  const username = eventData.username;
+  let password = eventData.password;
+  if('undefined' === typeof username|| !username) callback(null, err.errors(10101));
+  if('undefined' === typeof password|| !password) callback(null, err.errors(10102));
+
+  const dbQueryParams = {
     TableName: config.TableName,
-    Key: {
-      username: data.username,
-      password: data.password,
-    }
+    IndexName : 'username-index',
+    ExpressionAttributeValues : {':username': username,},
+    KeyConditionExpression : 'username = :username',
   };
-  return dynamoDb.get(params, (error, data) => {
-    if (error) {
-      callback(error);
+
+  return dynamoDb.query(dbQueryParams, (error, result) => {
+    try {
+      if (error) callback(error);
+      if (!result || result.Count < 1) callback(error, err.errors(10103));
+      result = result.Items[0];
+
+      // console.log(result);
+      const resultPassword = result.password;
+      const slat = result.slat;
+      password = sha256(password + slat);
+      // console.log(password, resultPassword);
+      if(password !== resultPassword) callback(error, err.errors(10104));
+
+      callback(error, result);
+    }catch (e) {
+      console.log(e);
+      callback({statusCode: 400, code: "catch error"});
     }
-    callback(error, data.Item);
   });
 };

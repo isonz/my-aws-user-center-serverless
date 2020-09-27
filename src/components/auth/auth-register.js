@@ -1,4 +1,5 @@
 'use strict';
+
 const func = require("../../common/functions");
 const sha256 = require("../../common/crypto");
 
@@ -15,8 +16,8 @@ module.exports = (event, callback) => {
 
   const username = eventData.username;
   let password = eventData.password;
-  if('undefined' === typeof username|| !username) callback('username is null');
-  if('undefined' === typeof password|| !password) callback('password is null');
+  if('undefined' === typeof username|| !username) callback(null, err.errors(10101));
+  if('undefined' === typeof password|| !password) callback(null, err.errors(10102));
 
   const slat = func.randomString(10);
   eventData.slat = slat;
