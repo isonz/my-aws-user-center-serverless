@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.6.7",
+    "moment": "^2.29.0",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
