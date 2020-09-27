@@ -4,6 +4,7 @@ const sha256 = require("../../common/crypto");
 
 const dynamoDb = require('../../helpers/dynamodb');
 const config = require('./base');
+const err = require('../../common/errors');
 const uuid = require('uuid');
 
 module.exports = (event, callback) => {
@@ -38,9 +39,8 @@ module.exports = (event, callback) => {
 
 
   return dynamoDb.query(dbQueryParams, (error, result) => {
-    if (error) {
-      callback(error);
-    }
+    if (error) callback(error);
+
     // console.log(result);
     if (!result || result.Count < 1){
       return dynamoDb.put(dbPutParams, (error, regResult) => {
@@ -51,7 +51,7 @@ module.exports = (event, callback) => {
       });
     }
 
-    callback(error, result.Items);
+    callback(error, err.errors(10001));
   });
 
 };

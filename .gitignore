@@ -5,6 +5,8 @@ jspm_packages
 # Serverless directories
 .serverless
 .dynamodb
+shared-local-instance.db
+
 
 # misc
 .idea

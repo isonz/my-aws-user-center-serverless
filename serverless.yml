@@ -144,8 +144,8 @@ custom:
   dynamodb:
     start:
       port: 8000
-      inMemory: true
-      # dbPath: true
+      inMemory: false
+      dbPath: ./.dynamodb/
       migrate: true
     migration:
       dir: offline/migrations
