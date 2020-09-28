@@ -34,11 +34,7 @@ module.exports.authLogin = (event, context, callback) => {
                 body: error.code
             });
         }else {
-            const response = {
-                statusCode: 200,
-                headers: config.HEADERS,
-                body: JSON.stringify(result),
-            };
+            response.body = JSON.stringify(result);
             context.succeed(response);
         }
     });

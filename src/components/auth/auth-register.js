@@ -42,13 +42,15 @@ module.exports = (event, callback) => {
   return dynamoDb.query(dbQueryParams, (error, result) => {
     if (error) callback(error);
 
-    // console.log(result);
+    //console.log(result);
     if (!result || result.Count < 1){
       return dynamoDb.put(dbPutParams, (error, regResult) => {
-        if (error) {
-          callback(error);
-        }
-        callback(error, dbPutParams.Item);
+        if (error) callback(error);
+        const regData = {
+          id: dbPutParams.Item.id,
+          username: dbPutParams.Item.username
+        };
+        callback(error, regData);
       });
     }
 

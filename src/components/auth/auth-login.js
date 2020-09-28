@@ -34,7 +34,11 @@ module.exports = (event, callback) => {
       // console.log(password, resultPassword);
       if(password !== resultPassword) callback(error, err.errors(10104));
 
-      callback(error, result);
+      const loginData = {
+        id: result.id,
+        username:result.username
+      };
+      callback(error, loginData);
     }catch (e) {
       console.log(e);
       callback({statusCode: 400, code: "catch error"});
