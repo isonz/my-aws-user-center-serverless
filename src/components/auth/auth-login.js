@@ -23,16 +23,25 @@ module.exports = (event, callback) => {
 
   return dynamoDb.query(dbQueryParams, (error, result) => {
     try {
-      if (error) callback(error);
-      if (!result || result.Count < 1) callback(error, err.errors(10103));
+      if (error){
+        callback(error);
+        return null;
+      }
+      if (!result || result.Count < 1){
+        callback(error, err.errors(10103));
+        return null;
+      }
       result = result.Items[0];
 
-      // console.log(result);
+      //console.log(result);
       const resultPassword = result.password;
       const slat = result.slat;
       password = sha256(password + slat);
-      // console.log(password, resultPassword);
-      if(password !== resultPassword) callback(error, err.errors(10104));
+      //console.log(password, resultPassword);
+      if(password !== resultPassword){
+        callback(error, err.errors(10104));
+        return null;
+      }
 
       const loginData = {
         id: result.id,
@@ -40,7 +49,7 @@ module.exports = (event, callback) => {
       };
       callback(error, loginData);
     }catch (e) {
-      console.log(e);
+      //console.log(e);
       callback({statusCode: 400, code: "catch error"});
     }
   });
