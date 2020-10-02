@@ -1,0 +1,54 @@
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html
+Resources:
+  TableLock:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableNameLock}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: ttl
+          AttributeType: N
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes: 
+        - IndexName: GSI1
+          KeySchema: 
+            - AttributeName: ttl
+              KeyType: HASH
+          Projection: 
+            ProjectionType: KEYS_ONLY          
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+
+  TableSession:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.tableNameSession}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: sessionId
+          AttributeType: S
+        - AttributeName: ttl
+          AttributeType: N
+      KeySchema:
+        - AttributeName: sessionId
+          KeyType: HASH
+      GlobalSecondaryIndexes: 
+        - IndexName: GSI1
+          KeySchema: 
+            - AttributeName: ttl
+              KeyType: HASH
+          Projection: 
+            ProjectionType: KEYS_ONLY          
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+Outputs:
+  LockTable:
+    Value: !GetAtt TableLock.Arn
+  SessionsTable:
+    Value: !GetAtt TableSession.Arn  
