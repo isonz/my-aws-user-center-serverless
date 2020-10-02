@@ -1,10 +1,13 @@
-export function authHeader() {
-    // return authorization header with jwt token
-    let user = JSON.parse(localStorage.getItem('user'));
+const userId = require( './auth-id');
 
-    if (user && user.token) {
-        return { 'Authorization': 'Bearer ' + user.token };
-    } else {
-        return {};
-    }
-}
+let response = {
+    headers: {"Access-Control-Allow-Origin": "*"},
+    statusCode: 200,
+    body: '',
+};
+
+module.exports = (event, callback) => {
+    const id = userId(event, callback);
+    if(!id) response.statusCode = 403;
+    return response;
+};

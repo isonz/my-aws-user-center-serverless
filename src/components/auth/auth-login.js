@@ -4,6 +4,7 @@ const sha256 = require("../../common/crypto");
 const dynamoDb = require('../../helpers/dynamodb');
 const config = require('./base');
 const err = require('../../common/errors');
+const jwt = require('jsonwebtoken');
 
 module.exports = (event, callback) => {
   const body = JSON.parse(event.body);
@@ -43,10 +44,18 @@ module.exports = (event, callback) => {
         return null;
       }
 
+      // console.log(process.env.JWT_SECRET);
+      const token = jwt.sign({
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),    //one day
+        data: result.id
+      }, process.env.JWT_SECRET);
+
       const loginData = {
         id: result.id,
-        username:result.username
+        username:result.username,
+        token
       };
+
       callback(error, loginData);
     }catch (e) {
       //console.log(e);

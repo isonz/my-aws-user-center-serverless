@@ -1,12 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-let response = {
-    headers: {"Access-Control-Allow-Origin": "*"},
-    statusCode: 200,
-    body: {},
-};
-
-module.exports.userId = (event, callback) => {
+module.exports = (event, callback) => {
     const authorization = 'undefined' === typeof event.headers.Authorization ? null : event.headers.Authorization;
     let jwtInfo;
     try {
@@ -15,13 +9,7 @@ module.exports.userId = (event, callback) => {
         jwtInfo = null;
         //callback(err);
     }
-    console.log(jwtInfo);
+    //console.log(jwtInfo);
     if(!jwtInfo) return null;
     return jwtInfo.data;
-};
-
-module.exports.authHeader = (event, callback) => {
-    const userId = userId(event, callback);
-    if(!userId) response.statusCode = 403;
-    return response;
 };

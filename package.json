@@ -10,11 +10,13 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.6.7",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.0",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
     "serverless": "^2.2.0",
+    "serverless-dotenv-plugin": "^3.0.0",
     "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^6.8.0"
   }
