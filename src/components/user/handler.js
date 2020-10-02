@@ -10,9 +10,7 @@ module.exports.userReadAll = (event, context, callback) => {
     let response = authHeader(event, callback);
     if(200 === response.statusCode){
         userReadAll(event, (error, result) => {
-            //console.log(error, result);
             if (error){
-                // callback(error);
                 response.statusCode = error.statusCode;
                 response.body = error.code;
             }else {
@@ -30,10 +28,6 @@ module.exports.userGetOne = (event, context, callback) => {
     if(200 === response.statusCode){
         userGetOne(event, (error, result) => {
             const response = {
-                statusCode: 200,
-                headers: {
-                    "Access-Control-Allow-Origin" : "*"
-                },
                 body: JSON.stringify(result),
             };
             context.succeed(response);
@@ -48,10 +42,6 @@ module.exports.userUpdate = (event, context, callback) => {
     if(200 === response.statusCode){
         userUpdate(event, (error, result) => {
             const response = {
-                statusCode: 200,
-                headers: {
-                    "Access-Control-Allow-Origin" : "*"
-                },
                 body: JSON.stringify(result),
             };
             context.succeed(response);
@@ -66,10 +56,6 @@ module.exports.userDelete = (event, context, callback) => {
     if(200 === response.statusCode){
         userDelete(event, (error, result) => {
             const response = {
-                statusCode: 200,
-                headers: {
-                    "Access-Control-Allow-Origin" : "*"
-                },
                 body: JSON.stringify(result),
             };
             context.succeed(response);

@@ -7,6 +7,7 @@ const dynamoDb = require('../../helpers/dynamodb');
 const config = require('./base');
 const err = require('../../common/errors');
 const uuid = require('uuid');
+const jwt = require('jsonwebtoken');
 
 module.exports = (event, callback) => {
   const body = JSON.parse(event.body);
@@ -46,10 +47,18 @@ module.exports = (event, callback) => {
     if (!result || result.Count < 1){
       return dynamoDb.put(dbPutParams, (error, regResult) => {
         if (error) callback(error);
+
+        const token = jwt.sign({
+          exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24),    //one day
+          data: dbPutParams.Item.id
+        }, process.env.JWT_SECRET);
+
         const regData = {
           id: dbPutParams.Item.id,
-          username: dbPutParams.Item.username
+          username: dbPutParams.Item.username,
+          token
         };
+
         callback(error, regData);
       });
     }

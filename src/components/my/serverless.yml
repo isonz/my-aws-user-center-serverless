@@ -1,0 +1,14 @@
+myGet:
+  handler: handler.myGet
+  events:
+    - http:
+        path: my
+        method: get
+        cors: true
+myUpdate:
+  handler: handler.myUpdate
+  events:
+    - http:
+        path: my
+        method: put
+        cors: true
