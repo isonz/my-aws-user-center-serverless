@@ -6,3 +6,5 @@ upload:
         method: post
         cors: true
 
+  environment:
+    BUCKET: ${self:custom.bucket}

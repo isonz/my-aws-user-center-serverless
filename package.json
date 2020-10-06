@@ -12,6 +12,7 @@
     "aws-sdk": "^2.6.7",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.0",
+    "node-fetch": "^2.6.1",
     "uuid": "^2.0.3"
   },
   "devDependencies": {

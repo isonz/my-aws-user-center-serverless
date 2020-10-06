@@ -154,4 +154,4 @@ custom:
       dir: offline/migrations
     stages:
       - dev
-
+  bucket: my-aws-user-center-server-upload-dev
