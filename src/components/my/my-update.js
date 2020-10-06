@@ -6,6 +6,12 @@ const authId = require( '../../helpers/auth-id');
 
 
 module.exports = (event, callback) => {
+  const eventItem = JSON.parse(event.body);
+  const updateItem = {
+    email: eventItem.email,
+    avatar: eventItem.avatar,
+  };
+
   const params = {
     TableName: config.TableName,
     Key: {
@@ -19,7 +25,6 @@ module.exports = (event, callback) => {
       return null;
     }
 
-    const updateItem = JSON.parse(event.body);
     result.Item.updatedAt = new Date().getTime();
     const allData = Object.assign(
         result.Item,

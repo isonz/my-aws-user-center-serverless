@@ -76,6 +76,7 @@ functions:
   - ${file(./src/components/auth/serverless.yml)}
   - ${file(./src/components/user/serverless.yml)}
   - ${file(./src/components/my/serverless.yml)}
+  - ${file(./src/components/upload/serverless.yml)}
 
 
 #    The following are a few example events you can configure

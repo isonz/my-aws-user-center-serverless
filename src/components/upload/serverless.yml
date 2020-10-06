@@ -1,0 +1,8 @@
+upload:
+  handler: handler.upload
+  events:
+    - http:
+        path: upload
+        method: post
+        cors: true
+
