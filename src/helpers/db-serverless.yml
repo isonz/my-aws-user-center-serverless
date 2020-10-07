@@ -43,7 +43,7 @@ Resources:
         - AttributeName: id
           KeyType: HASH
       GlobalSecondaryIndexes:
-        - IndexName: username-index
+        - IndexName: users-username-index
           KeySchema:
             - AttributeName: username
               KeyType: HASH

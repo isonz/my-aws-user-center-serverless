@@ -138,7 +138,6 @@ plugins:
   - serverless-offline
   - serverless-dynamodb-local
   - serverless-dotenv-plugin
-  - serverless-apigw-binary
 
 custom:
   serverless-offline:
