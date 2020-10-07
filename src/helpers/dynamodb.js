@@ -2,6 +2,7 @@
 
 const AWS = require('aws-sdk');
 let options = {};
+AWS.config.logger = console;
 
 // console.log(process.env.IS_OFFLINE);
 if (process.env.IS_OFFLINE) {
