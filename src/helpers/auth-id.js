@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (event, callback) => {
-    const authorization = 'undefined' === typeof event.headers.Authorization ? null : event.headers.Authorization;
+    const authorization = 'undefined' === typeof event.headers.Authorization ? ('undefined' === typeof event.headers.authorization ? null: event.headers.authorization) : event.headers.Authorization;
     //console.log(authorization);
     let jwtInfo;
     try {
