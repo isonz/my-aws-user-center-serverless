@@ -138,6 +138,7 @@ plugins:
   - serverless-offline
   - serverless-dynamodb-local
   - serverless-dotenv-plugin
+  - serverless-apigw-binary
 
 custom:
   serverless-offline:
@@ -155,3 +156,6 @@ custom:
     stages:
       - dev
   bucket: my-aws-user-center-server-upload-dev
+  apigwBinary:
+    types:
+      - 'multipart/form-data'

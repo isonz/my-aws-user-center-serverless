@@ -1,21 +1,30 @@
 'use strict';
 
-const fetch = require('node-fetch');
+const mime = require('mime-types');
+//const fetch = require('node-fetch');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 const authId = require( '../../helpers/auth-id');
-
+const {parse} = require('aws-multipart-parser');
 
 module.exports = (event, callback) => {
-  const fileBody = event.body;
-  const userId = authId(event, callback);
+  const formData = parse(event, true);
+  const avatarData = 'undefined' === typeof formData.avatar ? null : formData.avatar;
+  if (!avatarData) return null;
 
-  const getParams = {
+  const contentType = avatarData.contentType;
+  //const filename = avatarData.filename;
+  const content = avatarData.content;
+
+  const extension = contentType ? mime.extension(contentType) : '';
+  const userId = authId(event, callback);
+  const fullFileName = extension ? `${userId}.${extension}` : `${Date.now()}`;
+
+  const putParams = {
     Bucket: process.env.BUCKET,
-    Key: userId+'-avatar',
+    Key: 'avatar/'+fullFileName,
+    Body: content,
   };
-  let putParams = getParams;
-  putParams.Body = fileBody;
 
   s3.upload(putParams, function(err, data){
     if(err) {
@@ -25,6 +34,10 @@ module.exports = (event, callback) => {
     }
   });
 
+  // const getParams = {
+  //     Bucket: process.env.BUCKET,
+  //     Key: 'avatar/'+fullFileName,
+  // };
   // s3.getObject(getParams, function(err, data){
   //   if(err) {
   //     callback(err, null);

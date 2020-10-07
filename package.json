@@ -9,8 +9,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "aws-multipart-parser": "^0.2.1",
     "aws-sdk": "^2.6.7",
     "jsonwebtoken": "^8.5.1",
+    "mime-types": "^2.1.27",
     "moment": "^2.29.0",
     "node-fetch": "^2.6.1",
     "uuid": "^2.0.3"
