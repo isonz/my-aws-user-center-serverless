@@ -1,3 +1,16 @@
+Steps for the first run
+```
+npm install
+npm run installdb
+npm run runOffline
+```
+
+Restart only need run
+```
+npm run runOffline
+```
+
+
 # Serverless CRUD
 
 Serverless service which provides a basic CRUD scaffold.
