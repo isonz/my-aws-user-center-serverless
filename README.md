@@ -1,5 +1,10 @@
 Steps for the first run
 ```
+java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+
+
 npm install
 npm run installdb
 npm run runOffline
