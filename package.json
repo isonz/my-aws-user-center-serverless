@@ -4,6 +4,7 @@
   "description": "AWS Serverless User service",
   "scripts": {
     "runOffline": "sls offline start",
+    "installdb": "sls dynamodb install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ison",

@@ -16,6 +16,24 @@ DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin
 
 
 ```
+Steps for the first run
+```
+java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+
+aws dynamodb list-tables --endpoint-url http://localhost:8000
+
+
+npm install
+npm run installdb
+npm run runOffline
+
+
+```
+Restart only need run
+```
+npm run runOffline
+```
+
 
 # Serverless CRUD
 
