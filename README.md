@@ -3,8 +3,9 @@ npm install -g serverless
 sls dynamodb install
 sls offline start
 
+sls dynamodb start --migrate
 
-
+npm install --save-dev serverless-dynamodb-local
 npm install -g dynamodb-admin
 # For Windows:
 set DYNAMO_ENDPOINT=http://localhost:8000
