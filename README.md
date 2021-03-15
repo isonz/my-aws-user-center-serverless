@@ -1,3 +1,22 @@
+```
+npm install -g serverless
+sls dynamodb install
+sls offline start
+
+
+
+npm install -g dynamodb-admin
+# For Windows:
+set DYNAMO_ENDPOINT=http://localhost:8000
+dynamodb-admin
+
+# For Mac/Linux:
+DYNAMO_ENDPOINT=http://localhost:8000 dynamodb-admin
+
+
+
+```
+
 # Serverless CRUD
 
 Serverless service which provides a basic CRUD scaffold.
